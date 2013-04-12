@@ -4,8 +4,14 @@
 uint8_t id[OW_ROMCODE_SIZE];
 
 int main(int argc, char *argv[]) {
-  if(argc != 2) return 1;
-  ow_init(argv[1]);
+  if(argc != 2) {
+    puts("Path to COM port required.\n");
+    return 1;
+  }
+  if(ow_init(argv[1])) {
+    puts("Bus INIT failed. Check COM port.\n");
+    return 1;
+  }
 
   uint8_t c = 0, diff = OW_SEARCH_FIRST;
 
