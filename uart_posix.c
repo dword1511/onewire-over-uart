@@ -9,7 +9,7 @@
 
 #define _POSIX_SOURCE 1
 #define FALSE 0
-#define TRUE 1
+#define TRUE  1
 
 volatile int STOP = FALSE;
 int fd = -1;
@@ -18,7 +18,6 @@ int uart_init(char *dev_path) {
   fd = open(dev_path, O_RDWR | O_NOCTTY | O_NDELAY);
   if(fd < 0) return fd;
 
-  //fcntl(fd, F_SETFL, 0);
   return UART_SUCCESS;
 }
 
@@ -29,12 +28,9 @@ void uart_finit(void) {
 
 void uart_setb(uint32_t baud) {
   if(fd < 0) return;
-  int tio_buad;
+  static int tio_buad;
 
   switch(baud) {
-    case 4800:
-      tio_buad = B4800;
-      break;
     case 9600:
       tio_buad = B9600;
       break;
@@ -52,7 +48,7 @@ void uart_setb(uint32_t baud) {
       break;
     default:
       /* Above values should be enough. */
-      tio_buad = B4800;
+      tio_buad = B9600;
   }
 
   struct termios tio = {
@@ -98,7 +94,7 @@ void uart_putc(unsigned char c) {
 
 unsigned char uart_getc(void) {
   if(fd < 0) return 0x00;
-  unsigned char c = 0x00;
+  static unsigned char c = 0x00;
   while(!read(fd, &c, 1));
   return c;
 }
