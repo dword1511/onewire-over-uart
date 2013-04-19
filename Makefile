@@ -21,4 +21,14 @@ digitemp_evil: $(OBJS2)
 	gcc -c -Wall -O3 -o $@ $<
 
 clean:
-	rm -f $(OBJS1) $(OBJS2) lsow digitemp_evil
+	rm -f $(OBJS1) $(OBJS2) lsow digitemp_evil README.html
+
+doc: README.md
+	markdown README.md > README.html
+
+install: lsow digitemp_evil
+	install -m 0755 lsow /usr/local/bin/lsow
+	install -m 0755 digitemp_evil /usr/local/bin/digitemp_evil
+
+uninstall:
+	rm /usr/local/bin/lsow /usr/local/bin/digitemp_evil
