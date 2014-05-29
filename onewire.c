@@ -1,3 +1,10 @@
+/*********************************************************************************
+ * Access Dallas 1-Wire Devices
+ * Author of the initial code: Peter Dannegger (danni(at)specs.de)
+ * modified by Martin Thomas (mthomas(at)rhrk.uni-kl.de)
+ * modified by Chi Zhang (zhangchi866(at)gmail.com)
+ *********************************************************************************/
+
 #include <stdint.h>
 #include "onewire.h"
 #include "uart.h"

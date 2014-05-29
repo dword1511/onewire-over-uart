@@ -1,3 +1,24 @@
+/*********************************************************************************
+ * Title:    DS18X20-Functions via One-Wire-Bus
+ * Author:   Martin Thomas <eversmith@heizung-thomas.de>
+ *           http://www.siwawi.arubi.uni-kl.de/avr-projects
+ *
+ * Partly based on code from Peter Dannegger and others.
+ * Modified by Chi Zhang <zhangchi866@gmail.com>
+ *
+ * changelog:
+ * 20041124 - Extended measurements for DS18(S)20 contributed by Carsten Foss (CFO)
+ * 200502xx - function DS18X20_read_meas_single
+ * 20050310 - DS18x20 EEPROM functions (can be disabled to save flash-memory)
+ *            (DS18X20_EEPROMSUPPORT in ds18x20.h)
+ * 20100625 - removed inner returns, added static function for read scratchpad
+ *            . replaced full-celcius and fractbit method with decicelsius
+ *            and maxres (degreeCelsius*10e-4) functions, renamed eeprom-functions,
+ *            delay in recall_e2 replaced by timeout-handling
+ * 20100714 - ow_command_skip_last_recovery used for parasite-powerd devices so the
+ *            strong pull-up can be enabled in time even with longer OW recovery times
+ *********************************************************************************/
+
 #include <stdlib.h>
 #include <stdint.h>
 
