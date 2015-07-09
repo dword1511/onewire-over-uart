@@ -6,6 +6,8 @@ Using a UART to Implement a 1-Wire Bus Master
 
 [http://www.maximintegrated.com/app-notes/index.mvp/id/214](http://www.maximintegrated.com/app-notes/index.mvp/id/214 "Using a UART to Implement a 1-Wire Bus Master")
 
+Please also see this post from vbranimir: [https://haklabos.wordpress.com/projekti/digitemp/](https://haklabos.wordpress.com/projekti/digitemp/)
+
 ***
 ### Hardware
 
