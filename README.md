@@ -8,6 +8,10 @@ Using a UART to Implement a 1-Wire Bus Master
 
 Please also see this post from vbranimir: [https://haklabos.wordpress.com/projekti/digitemp/](https://haklabos.wordpress.com/projekti/digitemp/)
 
+## License
+
+ Part of the project are based on other works, most of which does not contain a statement of liscense. Please contact the authors separately via the email addresses listed in individual files. Other codes are licensed under [WTFPL](http://www.wtfpl.net/).
+
 ***
 ### Hardware
 
