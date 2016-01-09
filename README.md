@@ -49,13 +49,15 @@ Here are a few models that are tested. Many of these are prices under $5:
 ***
 ### Software
 
-Type "make" to get "lsow" and "digitemp\_evil" compiled.
+Type `make` to get `lsow` and `digitemp_evil` compiled.
+To build for Windows under Linux, try installing `mingw` and then type `make OS=Windows_NT CC=i686-w64-mingw32-gcc-posix`.
+Remember to `make clean` before and after switching targets.
 
 lsow is a tool that list devices on a onewire bus connected to a USB to UART converter.
-Simply type something like "lsow /dev/ttyUSB0" and it will show device IDs found on the bus.
+Simply type something like `lsow /dev/ttyUSB0` and it will show device IDs found on the bus.
 
 digitemp\_evil is a demonstration program that reads temperature values from DS18S20/DS18B20/DS1822
-onewire digital temperature sensors. Type "digitemp\_evil /dev/ttyUSB0" and read IDs and values.
+onewire digital temperature sensors. Type `digitemp_evil /dev/ttyUSB0` and read IDs and values.
 Sometimes after powering up DS18B20 will give something like 85°C, you will just need retry.
 
 ![Terminal Output](docs/dte.png "digitemp\_evil's output")

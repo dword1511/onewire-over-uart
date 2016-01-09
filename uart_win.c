@@ -10,7 +10,10 @@ DWORD  dwBytesWritten, dwBytesRead;
 
 int uart_init(char *dev_path) {
   hSerial = CreateFile(dev_path, GENERIC_READ | GENERIC_WRITE, 0, NULL, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, NULL);
-  if(hSerial == INVALID_HANDLE_VALUE) return GetLastError();
+  if(hSerial == INVALID_HANDLE_VALUE) {
+    return GetLastError();
+  }
+
   return UART_SUCCESS;
 }
 
@@ -61,12 +64,14 @@ void uart_setb(uint32_t baud) {
 }
 
 void uart_putc(unsigned char c) {
-  WriteFile(hSerial, &c, 1, NULL, NULL);
+  DWORD written;
+  WriteFile(hSerial, &c, 1, &written, NULL);
 }
 
 unsigned char uart_getc(void) {
+  DWORD read;
   if(hSerial == INVALID_HANDLE_VALUE) return 0x00;
   static unsigned char c = 0x00;
-  while(!ReadFile(hSerial, &c, 1, NULL, NULL));
+  while(!ReadFile(hSerial, &c, 1, &read, NULL));
   return c;
 }

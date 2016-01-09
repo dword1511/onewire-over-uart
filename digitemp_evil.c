@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 
     if(DS18X20_start_meas(DS18X20_POWER_EXTERN, NULL) == DS18X20_OK) {
       if(DS18X20_read_decicelsius(id, &temp_dc) == DS18X20_OK) {
-        printf("TEMP %3d.%01d°C\n", temp_dc / 10, temp_dc > 0 ? temp_dc % 10 : -temp_dc % 10);
+        printf("TEMP %3d.%01d C\n", temp_dc / 10, temp_dc > 0 ? temp_dc % 10 : -temp_dc % 10);
         continue;
       }
     }

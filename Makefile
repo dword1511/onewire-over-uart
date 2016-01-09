@@ -16,10 +16,10 @@ OBJS2 = $(OBJS) digitemp_evil.o devices/common.o devices/ds18x20.o
 all: lsow digitemp_evil
 
 lsow: $(OBJS1)
-	$(CC) -O3 -o $@ $(OBJS1)
+	$(CC) -static -O3 -o $@ $(OBJS1)
 
 digitemp_evil: $(OBJS2)
-	$(CC) -O3 -o $@ $(OBJS2)
+	$(CC) -static -O3 -o $@ $(OBJS2)
 
 %.o: %.c
 	$(CC) -c -Wall -O3 -o $@ $<
