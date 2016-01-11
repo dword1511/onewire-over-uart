@@ -58,7 +58,7 @@ To build for Windows under Linux, try installing `mingw` and then type `make OS=
 Remember to `make clean` before and after switching targets.
 
 lsow is a tool that list devices on a onewire bus connected to a USB to UART converter.
-Simply type something like `lsow /dev/ttyUSB0` and it will show device IDs found on the bus.
+Simply type something like `lsow /dev/ttyUSB0` (or something like `lsow COM0:` under Windows) and it will show device IDs found on the bus.
 
 digitemp\_evil is a demonstration program that reads temperature values from DS18S20/DS18B20/DS1822
 onewire digital temperature sensors. Type `digitemp_evil /dev/ttyUSB0` and read IDs and values.
