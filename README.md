@@ -6,7 +6,9 @@ Using a UART to Implement a 1-Wire Bus Master
 
 [http://www.maximintegrated.com/app-notes/index.mvp/id/214](http://www.maximintegrated.com/app-notes/index.mvp/id/214 "Using a UART to Implement a 1-Wire Bus Master")
 
-Please also see this post from vbranimir: [https://haklabos.wordpress.com/projekti/digitemp/](https://haklabos.wordpress.com/projekti/digitemp/)
+Please also see this post from *vbranimir*: [https://haklabos.wordpress.com/projekti/digitemp/](https://haklabos.wordpress.com/projekti/digitemp/)
+
+NOTE: parasitic power mode is not supported.
 
 ## License
 
@@ -19,11 +21,12 @@ The original version mentioned in Maxim's application note is shown as below.
 
 ![Schematics](docs/pp2od_tt.png "Original version")
 
-Also a simplified version is available:
+A simplified version is available:
 
 ![Schematics](docs/pp2od_rd.png "Simplified version")
 
-Resistors can vary from 200ohm to 20kohm. Transistors can be BJTs or MOSFETs.
+If you are sure your UART host has open-drain outputs, simply tie TX and RX together as mentioned by *vbranimir*.
+Transistors can either be BJTs or MOSFETs.
 The diode used in the simplified version should be fast and has a low forwarding voltage.
 1N4148 is known to work.
 
@@ -54,14 +57,15 @@ Here are a few models that are tested. Many of these are prices under $5:
 ### Software
 
 Type `make` to get `lsow` and `digitemp_evil` compiled.
-To build for Windows under Linux, try installing `mingw` and then type `make OS=Windows_NT CC=i686-w64-mingw32-gcc-posix`.
-Remember to `make clean` before and after switching targets.
+To build for Windows under Linux, try installing `mingw-w64` and then type `make OS=Windows_NT CC=i686-w64-mingw32-gcc-posix`.
 
 lsow is a tool that list devices on a onewire bus connected to a USB to UART converter.
 Simply type something like `lsow /dev/ttyUSB0` (or something like `lsow COM0:` under Windows) and it will show device IDs found on the bus.
 
 digitemp\_evil is a demonstration program that reads temperature values from DS18S20/DS18B20/DS1822
 onewire digital temperature sensors. Type `digitemp_evil /dev/ttyUSB0` and read IDs and values.
-Sometimes after powering up DS18B20 will give something like 85°C, you will just need retry.
+It will wait for conversion to complete, which usually takes around 0.75 seconds.
 
 ![Terminal Output](docs/dte.png "digitemp\_evil's output")
+
+Alternatively you can use `digitemp_DS9097` in the `digitemp` package as mentioned by *vbranimir*.

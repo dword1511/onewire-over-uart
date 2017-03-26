@@ -1,8 +1,6 @@
-OBJS += onewire.o
-
-ifndef $(CC)
-	CC = gcc
-endif
+OBJS   += onewire.o
+CC     ?= gcc
+CFLAGS += -O2 -Wall
 
 ifeq ($(OS), Windows_NT)
 	OBJS += uart_win.o
@@ -22,10 +20,10 @@ digitemp_evil: $(OBJS2)
 	$(CC) -static -O3 -o $@ $(OBJS2)
 
 %.o: %.c
-	$(CC) -c -Wall -O3 -o $@ $<
+	$(CC) -c $(CFLAGS) -o $@ $<
 
 clean:
-	rm -f $(OBJS1) $(OBJS2) lsow digitemp_evil README.html
+	rm -f $(OBJS1) $(OBJS2) uart_*.o lsow digitemp_evil README.html
 
 doc: README.md
 	markdown README.md > README.html
