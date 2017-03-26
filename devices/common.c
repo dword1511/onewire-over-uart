@@ -52,7 +52,6 @@ CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 #ifdef _WIN32
 #include <windows.h>
 #else
-#include <sys/select.h>
 #include <time.h>
 #endif
 
@@ -60,18 +59,10 @@ void delay_ms(uint32_t ms) {
 #ifdef _WIN32
   Sleep(ms);
 #else
-  /* nanosleep() can be interrupted, use select() instead. Do not known whether select() with NULL fd works on windows. */
-  /*
   struct timespec tv = {
     .tv_sec  = ms / 1000,
     .tv_nsec = (ms % 1000) * 1000000,
   };
   nanosleep(&tv, NULL);
-  */
-  struct timeval tv = {
-    .tv_sec  = ms / 1000,
-    .tv_usec = (ms % 1000) * 1000,
-  };
-  select(0, NULL, NULL, NULL, &tv);
 #endif
 }
