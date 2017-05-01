@@ -1,7 +1,9 @@
+#include <stdio.h>
+#include <stdlib.h>
+
 #include "onewire.h"
 #include "devices/ds18x20.h"
 #include "devices/common.h"
-#include <stdio.h>
 
 uint8_t id[OW_ROMCODE_SIZE];
 
@@ -39,8 +41,9 @@ int main(int argc, char *argv[]) {
       ow_finit();
       return 1;
     }
-    printf("Bus %s Device %03u Type 0x%02hx (%s) ID %02hx%02hx%02hx%02hx%02hx%02hx CRC 0x%02hx ", \
+    fprintf(stdout, "Bus %s Device %03u Type 0x%02hx (%s) ID %02hx%02hx%02hx%02hx%02hx%02hx CRC 0x%02hx ", \
            argv[1], c, id[0], get_type_by_id(id[0]), id[6], id[5], id[4], id[3], id[2], id[1], id[7]);
+    fflush(stdout);
     c ++;
 
     if (DS18X20_start_meas(DS18X20_POWER_EXTERN, NULL) == DS18X20_OK) {
@@ -48,7 +51,8 @@ int main(int argc, char *argv[]) {
         delay_ms(100); /* It will take a while */
       }
       if (DS18X20_read_decicelsius(id, &temp_dc) == DS18X20_OK) {
-        printf("TEMP %3d.%01d C\n", temp_dc / 10, temp_dc > 0 ? temp_dc % 10 : -temp_dc % 10);
+        /* Copied from my MCU code, so no float point */
+        fprintf(stdout, "TEMP %3d.%01d C\n", temp_dc / 10, temp_dc > 0 ? temp_dc % 10 : -temp_dc % 10);
         continue;
       }
     }
