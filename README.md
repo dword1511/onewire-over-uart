@@ -69,6 +69,11 @@ Here are a few tested converters, many of which are less than $5:
 
     ![Photo](docs/ch340g.jpg "CH340G")
 
+* Microchip MCP2221(A) USB to UART/I2C converters.
+    DIY-friendly.
+
+    ![Photo](docs/mcp2221a.jpg "MCP2221A")
+
 ***
 ### Software
 
