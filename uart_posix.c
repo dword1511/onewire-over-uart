@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <termios.h>
 #include <stdio.h>
+#include <assert.h>
 #include "uart.h"
 
 #define _POSIX_SOURCE 1
@@ -88,8 +89,11 @@ void uart_setb(uint32_t baud) {
 }
 
 void uart_putc(unsigned char c) {
+  ssize_t ret;
+
   if(fd < 0) return;
-  write(fd, &c, 1);
+  ret = write(fd, &c, 1);
+  assert(ret == 1);
 }
 
 unsigned char uart_getc(void) {
